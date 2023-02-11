@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <title>DressApp</title>
+    </head>
+    <body class="App">
+        <h1 class="display-1">DressApp</h1>
+        <div class="container1">
+            <label for="fname">Enter City Name</label><br>
+            <input type="text" id="city" name="city" class="form-control"><br>
+            <!-- <input type="button" class="btn btn-primary" onclick=click() value="Button"> -->
+            <button onclick="click()" id="demo" class="btn btn-dark">Submit</button>
+            <!-- <form class="form-group container">
+                <label for="fname">Enter City Name</label><br>
+                <input type="text" id="city" name="city" class="form-control"><br>
+                <input type="button" class="btn btn-primary" onclick=click() value="Button">
+                <button onclick="click()">Click me</button>
+            </form> -->
+        </div>
+
+        <!-- <script type="text/javascript">
+            function click(){
+                console.log("clicked");
+                var city = document.getElementById("city");
+                var url = "http://127.0.0.1:5000/?city="+city;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url);
+                xhttp.send();
+                xttp.onreadystatechange = (e) => {
+                    var weather=JSON.parse(Http.responseText);
+                    console.log(weather);
+                }
+            }
+        </script> -->
+        
+        <script>
+            var weather;
+            document.getElementById("demo").onclick = function() {myFunction()};
+            
+            function myFunction() {
+                console.log("clicked");
+                var city = document.getElementById("city").value;
+                var url = "http://127.0.0.1:5000/?city="+city;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url);
+                xhttp.send();
+                xhttp.onreadystatechange = (e) => {
+                    weather=JSON.parse(xhttp.responseText);
+                    console.log(weather);
+                    document.getElementById("discription").innerHTML = weather.outfit.replaceAll(' ', ', ');
+                    document.getElementById("temp").innerHTML = weather.temperature + '°C';
+
+                }
+            }
+        </script>
+
+        <h3 id="discription">
+            Clothes will be suggested here
+        </h3>
+        <h3 id="temp">
+            
+        </h3>
+
+    </body>
+</html>
+
